@@ -1,4 +1,3 @@
-# credits: https://github.com/deependujha
 import pygame
 import json
 import random
