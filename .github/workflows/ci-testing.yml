@@ -78,7 +78,7 @@ jobs:
           uv run pre-commit run --all-files || true
 
   type-check:
-    name: Type Checking with Pylance
+    name: Type Checking with mypy
     runs-on: ubuntu-latest
 
     steps:
@@ -101,4 +101,5 @@ jobs:
 
       - name: Run mypy type checking
         run: |
+          uv install mypy
           mypy
