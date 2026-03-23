@@ -99,6 +99,6 @@ jobs:
         run: |
           uv sync --all-groups
 
-      - name: Run pyright type checking
+      - name: Run mypy type checking
         run: |
-          uv run pyright src/ || true
+          mypy

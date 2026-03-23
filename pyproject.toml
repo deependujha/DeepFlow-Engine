@@ -58,3 +58,8 @@ source = [ "src/deepflow" ]
 precision = 2
 show_missing = true
 skip_covered = false
+
+[tool.mypy]
+ignore_missing_imports = true
+packages = [ "deepflow_engine" ]
+python_version = "3.12"
