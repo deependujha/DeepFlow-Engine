@@ -14,4 +14,4 @@ class Event:
 
     frame: int
     time: float
-    type: str
+    name: str

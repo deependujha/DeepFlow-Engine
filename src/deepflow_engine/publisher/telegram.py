@@ -1,13 +1,21 @@
 # credits: https://github.com/deependujha
 
+import os
 import telebot
 from typing import override
 from deepflow_engine.publisher.base import BasePublisher
 
 
+def get_telegram_bot_token() -> str:
+    return os.getenv("TELEGRAM_BOT_TOKEN")
+
+
 class TelegramPublisher(BasePublisher):
     def __init__(self) -> None:
-        self._bot = telebot.TeleBot("8243264320:AAE_dZ-zje2lkKGeaqW3P5Z0Cp2vrITepcs")
+        _token = get_telegram_bot_token()
+        if not _token:
+            raise ValueError("TELEGRAM_BOT_TOKEN environment variable not set.")
+        self._bot = telebot.TeleBot(_token)
         self._chat_id = "-1003780272239"  # oddly_realm group
 
     @override

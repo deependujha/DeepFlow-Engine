@@ -2,25 +2,42 @@
 
 
 class BaseError(Exception):
-    """Base class for all DeepFlow-Engine exceptions."""
+    """Base class for all DeepFlow exceptions."""
 
-    pass
+    prefix = "DeepFlow"
+
+    def __init__(self, message: str) -> None:
+        super().__init__(f"{self.prefix}: {message}")
+
+
+class DeepFlowEngineError(BaseError):
+    """Errors related to engine execution."""
+
+    prefix = "DeepFlow Engine error"
+
+
+class DeepFlowGameError(BaseError):
+    """Errors caused by game logic or misuse of the game API."""
+
+    prefix = "DeepFlow Game error"
 
 
 class RendererError(BaseError):
-    """Base class for all renderer-related exceptions."""
+    """Errors during frame rendering or video generation."""
 
-    def __init__(self, message: str) -> None:
-        _base_msg = "An error occurred in the renderer: "
-        super().__init__(_base_msg + message)
+    prefix = "DeepFlow Renderer error"
 
 
 class PublisherError(BaseError):
-    """Base class for all publisher-related exceptions."""
+    """Errors related to publishing (Telegram, Discord, etc.)."""
 
-    def __init__(self, message: str) -> None:
-        _base_msg = "An error occurred in the publisher: "
-        super().__init__(_base_msg + message)
+    prefix = "DeepFlow Publisher error"
 
 
-__all__ = ["BaseError", "RendererError", "PublisherError"]
+__all__ = [
+    "BaseError",
+    "DeepFlowEngineError",
+    "DeepFlowGameError",
+    "RendererError",
+    "PublisherError",
+]

@@ -28,6 +28,7 @@ scripts.deepflow_engine = "deepflow_engine:main"
 
 [dependency-groups]
 dev = [
+  "mypy>=1.19.1",
   "pre-commit>=4.5.1",
   "pyright>=1.1.350",
   "pytest>=7.4",

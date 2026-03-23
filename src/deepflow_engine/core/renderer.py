@@ -7,7 +7,7 @@ import tempfile
 from pathlib import Path
 
 from deepflow_engine.errors import RendererError
-from deepflow_engine.collisions import Event
+from deepflow_engine.core.event import Event
 from deepflow_engine.constants import DEFAULT_FPS
 
 
@@ -45,8 +45,8 @@ def load_collisions(log_path: Path) -> set[Event]:
 # ----------------------------
 # Validation
 # ----------------------------
-def validate_audio_dict(audio_dict: dict[str, Path]) -> None:
-    for event_type, path in audio_dict.items():
+def validate_audio_map(audio_map: dict[str, Path]) -> None:
+    for event_type, path in audio_map.items():
         if not path.exists():
             raise RendererError(
                 f"Audio file for event '{event_type}' not found: {path}"
@@ -54,14 +54,15 @@ def validate_audio_dict(audio_dict: dict[str, Path]) -> None:
 
 
 def validate_event_audio_mapping(
-    events: set[Event], audio_dict: dict[str, Path]
+    events: set[Event], audio_map: dict[str, Path]
 ) -> None:
-    missing = {event.type for event in events if event.type not in audio_dict}
+    missing = {event.name for event in events if event.name not in audio_map.keys()}
+    print(f"{missing=}, {audio_map=}, {events=}")
 
     if missing:
         raise RendererError(
             f"Missing audio mapping for event types: {sorted(missing)}.\n"
-            f"Provided mappings: {list(audio_dict.keys())}"
+            f"Provided mappings: {list(audio_map.keys())}"
         )
 
 
@@ -110,7 +111,7 @@ def write_concat_list(sequence: list[Path], list_path: Path, FPS: int) -> None:
 def build_ffmpeg_cmd(
     concat_list: Path,
     events: set[Event],
-    audio_dict: dict[str, Path],
+    audio_map: dict[str, Path],
     video_duration: float,
     output: Path,
 ) -> list[str]:
@@ -128,7 +129,7 @@ def build_ffmpeg_cmd(
     # --- add audio inputs ---
     audio_inputs = []
     for event in events:
-        audio_path = audio_dict[event.type]
+        audio_path = audio_map[event.name]
         audio_inputs.append((event, audio_path))
 
     for _, path in audio_inputs:
@@ -191,16 +192,24 @@ def build_ffmpeg_cmd(
 def video_renderer(
     output_filename: str | Path,
     frames_dir: str | Path,
-    collisions_log: str | Path,
-    audio_dict: dict[str, str | Path],
+    audio_map: dict[str, str | Path],
+    collisions_log: str | Path | None = None,
+    collisions_log_list: list[Event] | None = None,
     FPS: int = DEFAULT_FPS,
 ) -> Path:
     """Generate video from frames + event timeline + audio mapping."""
+    if collisions_log is not None and collisions_log_list is not None:
+        raise RendererError("Provide only one of collisions_log or collisions_log_list")
+    if collisions_log is None and collisions_log_list is None:
+        raise RendererError("Must provide one of collisions_log or collisions_log_list")
+
+    if collisions_log is not None:
+        collisions_log = Path(collisions_log)
+        collisions_log_list = load_collisions(collisions_log)
 
     frames_dir = Path(frames_dir)
-    collisions_log = Path(collisions_log)
     output_video = Path(output_filename)
-    audio_dict = {k: Path(v) for k, v in audio_dict.items()}
+    audio_map = {k: Path(v) for k, v in audio_map.items()}
 
     if not frames_dir.exists():
         raise RendererError(f"frames directory '{frames_dir}' not found.")
@@ -209,14 +218,11 @@ def video_renderer(
     if not base_frames:
         raise RendererError("no frames found.")
 
-    # --- events ---
-    collisions = load_collisions(collisions_log)
-
     # --- validation ---
-    validate_audio_dict(audio_dict)
-    validate_event_audio_mapping(collisions, audio_dict)
+    validate_audio_map(audio_map)
+    validate_event_audio_mapping(collisions_log_list, audio_map)
 
-    collision_frame_nums = {event.frame for event in collisions}
+    collision_frame_nums = {event.frame for event in collisions_log_list}
 
     # --- build timeline ---
     sequence = build_frame_sequence(base_frames, collision_frame_nums)
@@ -237,8 +243,8 @@ def video_renderer(
 
         cmd = build_ffmpeg_cmd(
             concat_list,
-            collisions,
-            audio_dict,
+            collisions_log_list,
+            audio_map,
             video_duration,
             output_video,
         )
