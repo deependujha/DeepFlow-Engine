@@ -2,7 +2,7 @@
 
 import telebot
 from typing import override
-from deepflow.publisher.base import BasePublisher
+from deepflow_engine.publisher.base import BasePublisher
 
 
 class TelegramPublisher(BasePublisher):

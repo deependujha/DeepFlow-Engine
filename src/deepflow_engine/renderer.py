@@ -6,9 +6,9 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from deepflow.errors import RendererError
-from deepflow.collisions import Event
-from deepflow.constants import DEFAULT_FPS
+from deepflow_engine.errors import RendererError
+from deepflow_engine.collisions import Event
+from deepflow_engine.constants import DEFAULT_FPS
 
 
 # ----------------------------
