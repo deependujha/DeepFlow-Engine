@@ -79,3 +79,11 @@ repos:
     rev: v0.24.1
     hooks:
       - id: validate-pyproject
+
+  - repo: local
+    hooks:
+      - id: credits-script
+        name: Run Credits Script
+        entry: ./scripts/credits.sh
+        language: script
+        pass_filenames: false
