@@ -24,12 +24,13 @@ Fixes # (issue)
 
 ## How to test
 
-<!-- Steps to verify this works -->
+<!-- Steps to verify this works
 
 ```bash
 # example
 python your_script.py
 ```
+-->
 
 ## Notes for reviewers
 
