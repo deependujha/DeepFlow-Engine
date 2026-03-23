@@ -11,9 +11,11 @@ on: # Trigger the workflow on push or pull request, but only for the main branch
   release:
     types: [published]
 
-# based on https://github.com/pypa/gh-action-pypi-publish
-id-token: write
+permissions:
+  id-token: write # Grant write permission for the OIDC token across all jobs
+  contents: read # Optionally, set other permissions
 
+# based on https://github.com/pypa/gh-action-pypi-publish
 jobs:
   build:
     runs-on: ubuntu-22.04
