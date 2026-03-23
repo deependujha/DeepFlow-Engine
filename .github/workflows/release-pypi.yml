@@ -12,6 +12,7 @@ on: # Trigger the workflow on push or pull request, but only for the main branch
     types: [published]
 
 # based on https://github.com/pypa/gh-action-pypi-publish
+id-token: write
 
 jobs:
   build:
