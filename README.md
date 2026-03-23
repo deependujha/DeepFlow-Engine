@@ -5,5 +5,5 @@
 ![License](https://img.shields.io/github/license/deependujha/deepflow-engine)
 
 <div align="center">
-    ![pygame](./assets/pygame.png)
+    <img src="./assets/pygame.png" alt="pygame" />
 </div>
