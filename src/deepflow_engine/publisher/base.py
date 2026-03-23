@@ -2,7 +2,7 @@
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from deepflow.errors import PublisherError
+from deepflow_engine.errors import PublisherError
 
 
 @dataclass

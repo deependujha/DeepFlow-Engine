@@ -79,7 +79,7 @@ enemies.add(E1)
 # LOGGING FOR SOUND
 collision_log = []
 
-print(f"DeepFlow: Starting generation of {TOTAL_FRAMES} frames...")
+print(f"DeepFlow-Engine: Starting generation of {TOTAL_FRAMES} frames...")
 
 for frame in range(TOTAL_FRAMES):
     # Update logic

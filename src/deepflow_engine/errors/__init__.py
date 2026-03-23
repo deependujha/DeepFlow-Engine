@@ -2,7 +2,7 @@
 
 
 class BaseError(Exception):
-    """Base class for all DeepFlow exceptions."""
+    """Base class for all DeepFlow-Engine exceptions."""
 
     pass
 

@@ -3,8 +3,9 @@ build-backend = "uv_build"
 requires = [ "uv-build>=0.10.8,<0.11" ]
 
 [project]
-name = "deepflow"
+name = "deepflow-engine"
 version = "0.1.0"
+
 description = "Automated frame-by-frame rendering and video synthesis for physics simulations and generative game shorts."
 readme = "README.md"
 authors = [
@@ -18,13 +19,12 @@ classifiers = [
   "Programming Language :: Python :: 3.14",
 ]
 dependencies = [
-  "ffmpeg>=1.4",
   "moviepy>=2.2.1",
   "pygame>=2.6.1",
   "pytelegrambotapi>=4.32",
 ]
-
-scripts.deepflow = "deepflow:main"
+scripts.deepflow-engine = "deepflow_engine:main"
+scripts.deepflow_engine = "deepflow_engine:main"
 
 [dependency-groups]
 dev = [

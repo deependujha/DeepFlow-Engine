@@ -1,10 +1,10 @@
 # credits: https://github.com/deependujha
 
 import pygame
-from deepflow.game import DeepFlowGame
+from deepflow_engine.game import DeepFlowEngineGame
 
 
-class SimplePyGame(DeepFlowGame):
+class SimplePyGame(DeepFlowEngineGame):
     def __init__(self):
         super().__init__()
         # Initializing

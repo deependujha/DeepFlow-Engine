@@ -6,7 +6,7 @@ import pygame
 import sys
 from typing import override
 
-from deepflow.constants import (
+from deepflow_engine.constants import (
     DEFAULT_FPS,
     DEFAULT_GAME_HEIGHT,
     DEFAULT_GAME_WIDTH,
@@ -14,7 +14,7 @@ from deepflow.constants import (
 )
 
 
-class DeepFlowBaseGame(ABC):
+class BaseGame(ABC):
     def __init__(self) -> None:
         pass
 
@@ -43,12 +43,12 @@ class DeepFlowBaseGame(ABC):
         pass
 
 
-class DeepFlowGame(DeepFlowBaseGame):
+class DeepFlowEngineGame(BaseGame):
     def __init__(
         self,
         *,
         fps: int = DEFAULT_FPS,
-        caption: str = "DeepFlow",
+        caption: str = "DeepFlow-Engine",
         display_surface_width: int = DEFAULT_GAME_WIDTH,
         display_surface_height: int = DEFAULT_GAME_HEIGHT,
         display_surface_fill_color: tuple[int, int, int] = WHITE,
