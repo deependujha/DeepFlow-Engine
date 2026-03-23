@@ -1,0 +1,17 @@
+# credits: https://github.com/deependujha
+
+# Creating colors
+BLUE = (0, 0, 255)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
+DEFAULT_GAME_WIDTH = 360
+DEFAULT_GAME_HEIGHT = 640  # still 9:16
+
+DEFAULT_WINDOW_WIDTH = 720
+DEFAULT_WINDOW_HEIGHT = 1280
+
+# --- PYGAME DEFAULT CONSTANTS ---
+DEFAULT_FPS = 60

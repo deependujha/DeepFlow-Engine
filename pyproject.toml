@@ -1,0 +1,32 @@
+[build-system]
+build-backend = "uv_build"
+requires = [ "uv-build>=0.10.8,<0.11" ]
+
+[project]
+name = "deepflow"
+version = "0.1.0"
+description = "Automated frame-by-frame rendering and video synthesis for physics simulations and generative game shorts."
+readme = "README.md"
+authors = [
+  { name = "deependujha", email = "deependujha21@gmail.com" },
+]
+requires-python = ">=3.12"
+classifiers = [
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+  "ffmpeg>=1.4",
+  "moviepy>=2.2.1",
+  "pygame>=2.6.1",
+  "pytelegrambotapi>=4.32",
+]
+
+scripts.deepflow = "deepflow:main"
+
+[dependency-groups]
+dev = [
+  "pre-commit>=4.5.1",
+]

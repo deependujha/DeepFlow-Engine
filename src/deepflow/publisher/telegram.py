@@ -1,0 +1,17 @@
+# credits: https://github.com/deependujha
+
+import telebot
+from typing import override
+from deepflow.publisher.base import BasePublisher
+
+
+class TelegramPublisher(BasePublisher):
+    def __init__(self) -> None:
+        self._bot = telebot.TeleBot("8243264320:AAE_dZ-zje2lkKGeaqW3P5Z0Cp2vrITepcs")
+        self._chat_id = "-1003780272239"  # oddly_realm group
+
+    @override
+    def _publish(self, filename: str, msg: str) -> None:
+        video = open(filename, "rb")
+        self._bot.send_video(chat_id=self._chat_id, video=video, caption=msg)
+        video.close()
