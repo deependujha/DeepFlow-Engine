@@ -1,7 +1,3 @@
-setup:
-	uv venv
-	source .venv/bin/activate
-
 .PHONY: test test-verbose test-cov test-fast lint format clean install-dev
 
 install-dev:
@@ -37,3 +33,7 @@ clean:
 	find . -type d -name .ruff_cache -exec rm -rf {} +
 	find . -type d -name htmlcov -exec rm -rf {} +
 	find . -type f -name .coverage -delete
+
+release:
+	chmod +x scripts/bump_version.sh
+	./scripts/bump_version.sh minor
