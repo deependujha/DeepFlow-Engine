@@ -51,7 +51,7 @@ pip install deepflow-engine
 
 ## 📚 Documentation & Examples
 
-For complete working examples, **check out the [`example/`](./example) directory**:
+For complete working examples, **check out the [`example/`](https://github.com/deependujha/DeepFlow-Engine/tree/main/example) directory**:
 
 - 🎮 Full game implementation with collision detection
 - 🎬 Interactive and headless modes
@@ -125,7 +125,7 @@ print(f"Video saved: {output}")
 
 ## 🎯 Complete Example
 
-For a complete, production-ready example with collision detection, event handling, and video generation, see the [`example/`](./example) directory:
+For a complete, production-ready example with collision detection, event handling, and video generation, see the [`example/`](https://github.com/deependujha/DeepFlow-Engine/tree/main/example) directory:
 
 ```bash
 # Run interactive mode
@@ -313,7 +313,7 @@ We welcome contributions! Please:
 
 ## 📜 License
 
-Apache 2.0 License - see [LICENSE](./LICENSE) for details
+Apache 2.0 License - see [LICENSE](https://github.com/deependujha/DeepFlow-Engine/blob/main/LICENSE) for details
 
 ---
 
