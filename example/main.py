@@ -125,15 +125,8 @@ def main():
     engine = dfe.DeepFlowEngine(
         game, interactive=False, frames_dir="frames", video_length_seconds=15
     )
-    out = dfe.run_pipeline(engine=engine, publish=True)
+    out = dfe.run_pipeline(engine=engine, publish=False)
     print(f"Pipeline output: {out}")
-
-
-if __name__ == "__main__":
-    main()
-
-
-def main(): ...
 
 
 if __name__ == "__main__":

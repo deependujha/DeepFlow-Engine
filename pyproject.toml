@@ -22,6 +22,7 @@ dependencies = [
   "moviepy>=2.2.1",
   "pygame>=2.6.1",
   "pytelegrambotapi>=4.32",
+  "rich>=14.3.3",
 ]
 scripts.deepflow-engine = "deepflow_engine:main"
 scripts.deepflow_engine = "deepflow_engine:main"

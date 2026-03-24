@@ -29,6 +29,11 @@ def run_pipeline(
     Returns:
         Path to generated video (headless) or None (interactive)
     """
+    if publish:
+        # when running pipeline with publish=True, first ensure, that the TelegramPublisher is properly configured
+        # with necessary credentials (e.g., bot token, chat ID) to avoid runtime errors during publishing.
+        publisher = TelegramPublisher()
+
     engine.run()
 
     # Interactive → nothing to render
@@ -61,7 +66,6 @@ def run_pipeline(
     print(f"DeepFlow: Video generated at → {output_path.resolve()}")
 
     if publish:
-        publisher = TelegramPublisher()
         publisher.publish(
             output_path.resolve(),
             VideoMetadata("sample video", ["tag1", "tag2"]),

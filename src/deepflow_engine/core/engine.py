@@ -119,9 +119,12 @@ class DeepFlowEngine:
                 self._tick()
                 self._step()
         else:
+            from rich.progress import track
+
             assert self.total_frames is not None
-            for frame in range(self.total_frames):
-                print(f"{frame=}")
+            for frame in track(
+                range(self.total_frames), description="Rendering frames"
+            ):
                 self.curr_frame = frame
                 self._tick()
                 self._step()
