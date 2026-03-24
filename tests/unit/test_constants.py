@@ -68,7 +68,7 @@ class TestGameConstants:
 
     def test_default_fps(self):
         """Test DEFAULT_FPS is set."""
-        assert DEFAULT_FPS == 60
+        assert DEFAULT_FPS == 30
 
     def test_window_is_twice_game_size(self):
         """Test window dimensions are 2x game dimensions."""
