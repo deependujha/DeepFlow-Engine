@@ -22,7 +22,7 @@ ______________________________________________________________________
 # Inside the main game loop
 while True:
     ...
-    pygame.display.update()
+    pygame.display.flip()
     clock.tick(FPS)
 ```
 

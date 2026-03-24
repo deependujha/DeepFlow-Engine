@@ -37,9 +37,8 @@ def run_pipeline(
     engine.run()
 
     # Interactive → nothing to render
-    if engine.interactive:
-        print("DeepFlow: Interactive session ended. No video generated.")
-        return None
+    if engine.interactive and engine.frames_dir is None:
+        return "DeepFlow: Interactive session ended. No video generated."
 
     # Headless → generate video
     collisions_log = engine.collision_log

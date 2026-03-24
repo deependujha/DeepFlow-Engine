@@ -81,7 +81,7 @@ while True:
     # render
     screen.blit(...)
 
-    pygame.display.update()
+    pygame.display.flip() # updates the entire display, `update()` can be used to update only a portion of the screen
     clock.tick(FPS)
 ```
 
@@ -323,7 +323,7 @@ while running:
     for entity in all_sprites:
         screen.blit(entity.image, entity.rect)
 
-    pygame.display.update()
+    pygame.display.flip() # `flip()` updates the entire display, `update()` can be used to update only a portion of the screen
 
 pygame.quit()
 sys.exit()

@@ -41,6 +41,15 @@ class DeepFlowGame(ABC):
     # Lifecycle
     # ------------------------------------------------------------------
 
+    @property
+    def interactive(self) -> bool:
+        """Helper property to check if game is in interactive mode."""
+        if self._engine is None:
+            raise RuntimeError(
+                "Game must be attached to an engine before checking mode"
+            )
+        return self._engine.interactive
+
     @abstractmethod
     def start(self) -> None:
         """Initialize game state.
@@ -88,6 +97,14 @@ class DeepFlowGame(ABC):
             canvas: The surface to draw on (display or offscreen).
         """
         pass
+
+    def get_input(self) -> pygame.key.ScancodeWrapper | None:
+        assert self._engine is not None, (
+            "Game must be attached to an engine before getting input"
+        )
+        if self._engine.interactive:
+            return pygame.key.get_pressed()
+        return None
 
     # ------------------------------------------------------------------
     # Audio

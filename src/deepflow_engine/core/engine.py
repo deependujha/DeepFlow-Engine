@@ -57,7 +57,7 @@ class DeepFlowEngine:
 
         self.collision_log: list[Event] = []
         self.collision_filename = collision_filename
-        self.curr_frame: int | None = None
+        self.curr_frame: int = 0
 
         self._canvas: pygame.Surface | None = None
         self._clock: pygame.time.Clock | None = None
@@ -106,6 +106,7 @@ class DeepFlowEngine:
 
     def run(self) -> None:
         self.game.start()
+        self.game.running = True  # Ensure running is True after start
         self.loop()
         self.exit()
 
@@ -122,26 +123,29 @@ class DeepFlowEngine:
             from rich.progress import track
 
             assert self.total_frames is not None
-            for frame in track(
-                range(self.total_frames), description="Rendering frames"
-            ):
-                self.curr_frame = frame
+            for _ in track(range(self.total_frames), description="Rendering frames"):
                 self._tick()
                 self._step()
 
     def _tick(self) -> None:
         """Update delta time."""
         assert self._clock is not None
-        dt = self._clock.tick(self.fps) / 1000.0
+        if self.interactive:
+            dt = self._clock.tick(self.fps) / 1000.0
+        else:
+            dt = 1.0 / self.fps
         self.game.dt = dt
 
     def _step(self) -> None:
         """Single frame execution."""
+        self.curr_frame += 1
         self.game.update()
         self.game.render(self.canvas)
 
         if self.interactive:
-            pygame.display.update()
+            pygame.display.flip()
+            if self.frames_dir is not None:
+                self.save_frame()  # Optional: save frames in interactive mode for debugging
         else:
             self.save_frame()
 
@@ -192,10 +196,9 @@ class DeepFlowEngine:
             if event_name not in audio_map:
                 raise DeepFlowGameError(f"No audio mapping found for '{event_name}'")
             pygame.mixer.Sound(audio_map[event_name]).play()
-        else:
-            if self.curr_frame is None:
-                raise DeepFlowEngineError("curr_frame must be set for event logging")
 
+        if self.frames_dir is not None:
+            # if generating frames, also log events for video rendering
             self.collision_log.append(
                 Event(
                     frame=self.curr_frame,
