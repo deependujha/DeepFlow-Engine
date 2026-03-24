@@ -5,5 +5,5 @@
 ![License](https://img.shields.io/github/license/deependujha/deepflow-engine)
 
 <div align="center">
-    <img alt="pygame" src="https://gist.githubusercontent.com/deependujha/da01263a8a0b995289697ab5fc7580b7/raw/8d665e0fcf38a5bb83915efa9d73bf1152a3dca9/deepflow-engine.svg" />
+    <img alt="pygame" src="https://raw.githubusercontent.com/gist/deependujha/da01263a8a0b995289697ab5fc7580b7/raw/97ce6a292d0e78c6f7a35461851b094a244907f1/deepflow-engine.svg" />
 </div>
